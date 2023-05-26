@@ -40,7 +40,7 @@ const [, , token, commit_sha] = process.argv;
 
 			console.log("== update metric data ==");
       const historyData = JSON.parse(historyJson)
-      historyData[commit_sha] = currentData
+      historyData[commit_sha] = JSON.parse(currentData)
 
 			fs.writeFileSync(dataPath, JSON.stringify(historyData));
 
