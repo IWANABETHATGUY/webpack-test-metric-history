@@ -40,10 +40,10 @@ process.stdin.on("end", () => {
 			console.log(`${k}: ${v}`);
 		});
 	} else {
-    let json = JSON.stringify(extractTestMetric)
+    let json = JSON.stringify(extractedTestInfo)
     console.log(json)
     const rootPath = path.resolve(__dirname, "..")
-    fs.writeSync(path.resolve(rootPath, "out.json"), json)
+    fs.writeFileSync(path.resolve(rootPath, "out.json"), json)
 	}
 });
 
