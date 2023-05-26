@@ -53,7 +53,7 @@ const [, , token, commit_sha] = process.argv;
 			fs.writeFileSync(indexPath, indexContent);
 
 			console.log("== commit ==");
-			await run("git", ["add", "result.json"]);
+			await run("git", ["add", "result.json", "index.txt"]);
 			try {
 				await run("git", ["commit", "-m", `"update metric data"`]);
 			} catch {
