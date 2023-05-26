@@ -7,9 +7,9 @@ const [, , token, commit_sha] = process.argv;
 (async () => {
 	const rootDir = path.resolve(__dirname, "../");
 	const currentDataPath = path.resolve(rootDir, "out.json");
-	const content = fs.readFileSync(currentDataPath).toString();
+	const currentData = fs.readFileSync(currentDataPath).toString();
 
-	const targetDir = resolve(rootDir, ".gh-pages");
+	const targetDir = path.resolve(rootDir, ".gh-pages");
 	if (!fs.existsSync(targetDir)) {
 		await run("git", [
 			"clone",
@@ -27,9 +27,9 @@ const [, , token, commit_sha] = process.argv;
 	const cwd = process.cwd();
 	let dataPath = path.resolve(targetDir, "result.json");
 
-	let data = "{}";
+	let historyJson = "{}";
 	if (fs.existsSync(dataPath)) {
-		data = fs.readFileSync(path.resolve(dataPath)).toString();
+		historyJson = fs.readFileSync(path.resolve(dataPath)).toString();
 	}
 
 	process.chdir(targetDir);
@@ -39,7 +39,10 @@ const [, , token, commit_sha] = process.argv;
 			await run("git", ["pull", "--rebase"]);
 
 			console.log("== update metric data ==");
-			fs.writeFileSync(dataPath, content);
+      const historyData = JSON.parse(historyJson)
+      historyData[commit_sha] = currentData
+
+			fs.writeFileSync(dataPath, JSON.stringify(historyData));
 
 			console.log("== commit ==");
 			await run("git", ["add", "result.json"]);
