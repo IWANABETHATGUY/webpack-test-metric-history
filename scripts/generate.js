@@ -26,11 +26,16 @@ const [, , token, commit_sha] = process.argv;
 	}
 	const cwd = process.cwd();
 	let dataPath = path.resolve(targetDir, "result.json");
+	let indexPath = path.resolve(targetDir, "index.txt");
 
 	let historyJson = "{}";
+  let indexContent = ""
 	if (fs.existsSync(dataPath)) {
 		historyJson = fs.readFileSync(path.resolve(dataPath)).toString();
 	}
+  if (fs.existsSync(indexPath)) {
+    indexContent = fs.readFileSync(path.resolve(indexPath)).toString()
+  }
 
 	process.chdir(targetDir);
 	for (let i = 0; i < 21; i++) {
@@ -41,8 +46,11 @@ const [, , token, commit_sha] = process.argv;
 			console.log("== update metric data ==");
       const historyData = JSON.parse(historyJson)
       historyData[commit_sha] = JSON.parse(currentData)
+			console.log("== update index data ==");
+      indexContent = indexContent.trim() + "\n" + commit_sha.toString()
 
 			fs.writeFileSync(dataPath, JSON.stringify(historyData));
+			fs.writeFileSync(indexPath, indexContent);
 
 			console.log("== commit ==");
 			await run("git", ["add", "result.json"]);
