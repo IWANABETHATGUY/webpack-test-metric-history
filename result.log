@@ -1,0 +1,198 @@
+
+> webpack-test@0.0.2 test /home/victor/Documents/rspack/rspack/webpack-test
+> node --expose-gc --max-old-space-size=4096 --experimental-vm-modules --trace-deprecation ../node_modules/jest/bin/jest.js --logHeapUsage --runInBand --bail
+
+FAIL ./WebpackError.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: WebpackError is not defined
+
+      4 |
+      5 | describe.skip("WebpackError", () => {
+    > 6 | 	class CustomError extends WebpackError {
+        | 	                          ^
+      7 | 		constructor(message) {
+      8 | 			super();
+      9 |
+
+      at WebpackError.unittest.js:6:28
+      at Object.<anonymous> (WebpackError.unittest.js:5:10)
+
+FAIL ./WasmHashes.unittest.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (../node_modules/@jest/core/build/TestScheduler.js:172:18)
+      at ../node_modules/@jest/core/build/TestScheduler.js:302:19
+      at ../node_modules/emittery/index.js:311:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (../node_modules/emittery/index.js:309:23)
+
+FAIL ./SemVer.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: parseVersion is not defined
+
+      28 |
+      29 | 	for (const [name, fn] of [
+    > 30 | 		["normal", parseVersion],
+         | 		           ^
+      31 | 		["runtime", createRuntimeFunction(parseVersionRuntimeCode)]
+      32 | 	]) {
+      33 | 		it(`should parseVersion correctly (${name})`, () => {
+
+      at SemVer.unittest.js:30:14
+      at Object.<anonymous> (SemVer.unittest.js:16:10)
+
+FAIL ./RuntimeTemplate.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: RuntimeTemplate is not defined
+
+      51 |
+      52 | 	describe("es6", () => {
+    > 53 | 		const runtimeTemplate = new RuntimeTemplate(
+         | 		                        ^
+      54 | 			undefined,
+      55 | 			{ environment: { templateLiteral: true } },
+      56 | 			new RequestShortener(__dirname)
+
+      at RuntimeTemplate.unittest.js:53:27
+      at RuntimeTemplate.unittest.js:52:2
+      at Object.<anonymous> (RuntimeTemplate.unittest.js:7:10)
+
+FAIL ./RawModule.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: RawModule is not defined
+
+      10 | 	const identifier = "identifierStr attribute";
+      11 | 	const readableIdentifier = "readableIdentifierStr attribute";
+    > 12 | 	const myRawModule = new RawModule(source, identifier, readableIdentifier);
+         | 	                    ^
+      13 |
+      14 | 	describe("identifier", () => {
+      15 | 		it("returns value for identifierStr attribute", () => {
+
+      at RawModule.unittest.js:12:22
+      at Object.<anonymous> (RawModule.unittest.js:8:10)
+
+FAIL ./MultiItemCache.unittest.js
+  ● Test suite failed to run
+
+    Cannot find module '../lib/Cache' from 'MultiItemCache.unittest.js'
+
+      1 | "use strict";
+      2 |
+    > 3 | const Cache = require("../lib/Cache");
+        |               ^
+      4 | // TODO: recover
+      5 | // const { ItemCacheFacade, MultiItemCache } = require("../lib/CacheFacade");
+      6 |
+
+      at Resolver._throwModNotFoundError (../node_modules/jest-resolve/build/resolver.js:487:11)
+      at Object.<anonymous> (MultiItemCache.unittest.js:3:15)
+
+
+Summary of all failing tests
+FAIL ./WebpackError.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: WebpackError is not defined
+
+      4 |
+      5 | describe.skip("WebpackError", () => {
+    > 6 | 	class CustomError extends WebpackError {
+        | 	                          ^
+      7 | 		constructor(message) {
+      8 | 			super();
+      9 |
+
+      at WebpackError.unittest.js:6:28
+      at Object.<anonymous> (WebpackError.unittest.js:5:10)
+
+FAIL ./WasmHashes.unittest.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (../node_modules/@jest/core/build/TestScheduler.js:172:18)
+      at ../node_modules/@jest/core/build/TestScheduler.js:302:19
+      at ../node_modules/emittery/index.js:311:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (../node_modules/emittery/index.js:309:23)
+
+FAIL ./SemVer.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: parseVersion is not defined
+
+      28 |
+      29 | 	for (const [name, fn] of [
+    > 30 | 		["normal", parseVersion],
+         | 		           ^
+      31 | 		["runtime", createRuntimeFunction(parseVersionRuntimeCode)]
+      32 | 	]) {
+      33 | 		it(`should parseVersion correctly (${name})`, () => {
+
+      at SemVer.unittest.js:30:14
+      at Object.<anonymous> (SemVer.unittest.js:16:10)
+
+FAIL ./RuntimeTemplate.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: RuntimeTemplate is not defined
+
+      51 |
+      52 | 	describe("es6", () => {
+    > 53 | 		const runtimeTemplate = new RuntimeTemplate(
+         | 		                        ^
+      54 | 			undefined,
+      55 | 			{ environment: { templateLiteral: true } },
+      56 | 			new RequestShortener(__dirname)
+
+      at RuntimeTemplate.unittest.js:53:27
+      at RuntimeTemplate.unittest.js:52:2
+      at Object.<anonymous> (RuntimeTemplate.unittest.js:7:10)
+
+FAIL ./RawModule.unittest.js
+  ● Test suite failed to run
+
+    ReferenceError: RawModule is not defined
+
+      10 | 	const identifier = "identifierStr attribute";
+      11 | 	const readableIdentifier = "readableIdentifierStr attribute";
+    > 12 | 	const myRawModule = new RawModule(source, identifier, readableIdentifier);
+         | 	                    ^
+      13 |
+      14 | 	describe("identifier", () => {
+      15 | 		it("returns value for identifierStr attribute", () => {
+
+      at RawModule.unittest.js:12:22
+      at Object.<anonymous> (RawModule.unittest.js:8:10)
+
+FAIL ./MultiItemCache.unittest.js
+  ● Test suite failed to run
+
+    Cannot find module '../lib/Cache' from 'MultiItemCache.unittest.js'
+
+      1 | "use strict";
+      2 |
+    > 3 | const Cache = require("../lib/Cache");
+        |               ^
+      4 | // TODO: recover
+      5 | // const { ItemCacheFacade, MultiItemCache } = require("../lib/CacheFacade");
+      6 |
+
+      at Resolver._throwModNotFoundError (../node_modules/jest-resolve/build/resolver.js:487:11)
+      at Object.<anonymous> (MultiItemCache.unittest.js:3:15)
+
+
+Test Suites: 6 failed, 35 skipped, 6 of 41 total
+Tests:       381 skipped, 381 total
+Snapshots:   0 total
+Time:        8.13 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
+ ELIFECYCLE  Test failed. See above for more details.

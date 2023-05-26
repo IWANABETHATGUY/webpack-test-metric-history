@@ -1,0 +1,1 @@
+!function(){var n={512:function(n,r,t){n.exports=require("fs")},315:function(n,r,t){r.loadChunk=function(n,r){t(["./file"+n],function(n){r(n)})},r.nextTick=process.nextTick,r.fs=t("512")}},r={},t=function t(o){var e=r[o];if(void 0!==e)return e.exports;var i=r[o]={exports:{}};return n[o](i,i.exports,t),i.exports}("315");exports.abc=t}();
