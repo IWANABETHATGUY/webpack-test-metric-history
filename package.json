@@ -118,8 +118,5 @@
     "coverageReporters": [
       "json"
     ]
-  },
-  "engines": {
-    "pnpm": "7.32.0"
   }
 }
