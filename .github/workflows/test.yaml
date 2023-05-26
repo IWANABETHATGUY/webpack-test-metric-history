@@ -23,10 +23,19 @@ jobs:
       - name: Pnpm Cache
         uses: ./.github/actions/pnpm-cache
 
+
       - name: Run test
         run: |
           pnpm test:metric
-          node ./scripts/generate.js
+
+      - name: Setup git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Upload
+        run: |
+          node ./scripts/generate.js ${{ secrets.GITHUB_TOKEN }} ${{ github.sha }}
 
 
       # - name: Store benchmark result
