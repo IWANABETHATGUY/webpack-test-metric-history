@@ -26,6 +26,7 @@ jobs:
       - name: Run test
         run: |
           pnpm test:metric
+          node ./scripts/generate.js
 
 
       # - name: Store benchmark result
