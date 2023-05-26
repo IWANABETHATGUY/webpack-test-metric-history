@@ -25,5 +25,5 @@ function __webpack_require__(moduleId) {
  return module.exports;
 
 }
-var __webpack_exports__ = __webpack_require__('./fixtures/a.js');
-})();
+var __webpack_exports__ = __webpack_require__("./fixtures/a.js");
+})()
