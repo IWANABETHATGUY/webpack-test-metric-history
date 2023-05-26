@@ -2,7 +2,7 @@ name: Benchmark History
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   contents: write
@@ -27,6 +27,7 @@ jobs:
         run: |
           set -o pipefail
           pnpm test:metric
+
 
       # - name: Store benchmark result
       #   uses: benchmark-action/github-action-benchmark@v1.14.0
