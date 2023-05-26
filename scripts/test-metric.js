@@ -1,6 +1,9 @@
 const process = require("process");
 const { isNumber } = require("util");
 const { extractTestMetric } = require("./test-metric-util");
+const isCI = require("is-ci");
+const fs = require('fs')
+const path = require('path')
 let data = "";
 
 process.stdin.on("readable", () => {
@@ -31,10 +34,17 @@ process.stdin.on("end", () => {
 		process.exit(-1);
 	}
 
-  let extractedTestInfo = extractTestMetric(jsonObj)
-  Object.entries(extractedTestInfo).forEach(([k, v]) => {
-    console.log(`${k}: ${v}`)
-  })
+	let extractedTestInfo = extractTestMetric(jsonObj);
+	if (!isCI) {
+		Object.entries(extractedTestInfo).forEach(([k, v]) => {
+			console.log(`${k}: ${v}`);
+		});
+	} else {
+    let json = JSON.stringify(extractTestMetric)
+    console.log(json)
+    const rootPath = path.resolve(__dirname, "..")
+    fs.writeSync(path.resolve(rootPath, "out.json"), json)
+	}
 });
 
 const isEmptyObject = (obj) => {
@@ -42,4 +52,3 @@ const isEmptyObject = (obj) => {
 		obj != undefined && typeof obj === "object" && Object.keys(obj).length === 0
 	);
 };
-
