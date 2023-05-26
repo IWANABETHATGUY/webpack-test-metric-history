@@ -55,8 +55,7 @@ const [, , token, commit_sha] = process.argv;
         console.log(`${currentCompatibility}`)
       }
 
-			console.log("== commit ==");
-			console.log("== push ==");
+      break;
 		} catch (e) {
 			await new Promise((resolve) =>
 				setTimeout(resolve, Math.random() * 30000),
