@@ -21,27 +21,35 @@ jobs:
       - name: Pnpm Cache
         uses: ./.github/actions/pnpm-cache
 
+      - name: Get the PR number
+        if: github.event_name == 'pull_request'
+        id: pr-number
+        uses: kkak10/pr-number-action@v1.3
 
       - name: Run test
         run: |
           pnpm test:metric
 
+
       - name: diff
+        id: pr-diff
         run: |
           node ./scripts/pr-diff.js ${{ secrets.GITHUB_TOKEN }} ${{ github.sha }} > output
+          cat output
           comment="$(cat output)"
           comment="${comment//'%'/'%25'}"
           comment="${comment//$'\n'/'%0A'}"
           comment="${comment//$'\r'/'%0D'}"
+
           echo "comment=$comment" >> $GITHUB_OUTPUT
 
       - name: Write a new comment
         uses: peter-evans/create-or-update-comment@v1.4.5
         continue-on-error: true
         with:
-          issue-number: ${{ github.event.issue.number }}
+          issue-number: ${{ steps.pr-number.outputs.pr }}
           body: |
-            ${{ steps.bench_comparison.outputs.comment }}
+            ${{ steps.pr-diff.outputs.comment }}
 
 
 
