@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const { run } = require("./utils");
 
+const { markdownTable } = require("markdown-table");
+
 const GITHUB_ACTOR = process.env.GITHUB_ACTOR;
 const [, , token, commit_sha] = process.argv;
 (async () => {
@@ -29,33 +31,43 @@ const [, , token, commit_sha] = process.argv;
 	let indexPath = path.resolve(targetDir, "index.txt");
 
 	let historyJson = "{}";
-  let indexContent = ""
+	let indexContent = "";
 	if (fs.existsSync(dataPath)) {
 		historyJson = fs.readFileSync(path.resolve(dataPath)).toString();
 	}
-  if (fs.existsSync(indexPath)) {
-    indexContent = fs.readFileSync(path.resolve(indexPath)).toString()
-  }
+	if (fs.existsSync(indexPath)) {
+		indexContent = fs.readFileSync(path.resolve(indexPath)).toString();
+	}
 
 	process.chdir(targetDir);
 	for (let i = 0; i < 21; i++) {
 		try {
 			await run("git", ["reset", "--hard", "origin/gh-pages"]);
 			await run("git", ["pull", "--rebase"]);
-      let historyData = JSON.parse(historyJson)
-      let indexList = indexContent.split('\n')
-      let lastestMainCommit = indexList[indexList.length - 1]
+			let historyData = JSON.parse(historyJson);
+			let indexList = indexContent.split("\n");
+			let lastestMainCommit = indexList[indexList.length - 1];
 
-      let latestMainCommitData = historyData[lastestMainCommit]
-      
-      let currentCompatibility = currentData['Tests Compatibility']
-      let lastestMainCommitCompatibility = latestMainCommitData['Tests Compatibility']
+			let latestMainCommitData = historyData[lastestMainCommit];
 
-      if (currentCompatibility !== lastestMainCommitCompatibility) {
-        console.log(`${currentCompatibility}`)
-      }
+			let currentCompatibility = currentData["Tests Compatibility"];
+			let lastestMainCommitCompatibility =
+				latestMainCommitData["Tests Compatibility"];
 
-      break;
+			if (currentCompatibility !== lastestMainCommitCompatibility) {
+				let icon = "❌ ⏬";
+				if (currentCompatibility > lastestMainCommitCompatibility) {
+					icon = "✅ ⏫";
+				}
+        let diff = +(currentCompatibility.slice(-1)) - (+lastestMainCommitCompatibility.slice(-1));
+				let markdown = markdownTable([
+					["main", "pr", "diff"],
+					[lastestMainCommitCompatibility, currentCompatibility, `${icon} ${diff.toFixed(2)}` ],
+				]);
+				console.log(markdown);
+			}
+
+			break;
 		} catch (e) {
 			await new Promise((resolve) =>
 				setTimeout(resolve, Math.random() * 30000),
