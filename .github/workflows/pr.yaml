@@ -29,13 +29,8 @@ jobs:
       - name: diff
         id: pr-diff
         run: |
-          echo "## Test Compatibility Diff" > output
+          echo "## Test Compatibility Diff" > output.md
           node ./scripts/pr-diff.js ${{ secrets.GITHUB_TOKEN }} ${{ github.sha }}
-          cat output
-          comment="$(cat output)"
-          comment="${comment//'%'/'%25'}"
-          comment="${comment//$'\r'/'%0D'}"
-          comment="${comment//$'\n'/'%0A'}"
 
           echo "comment=$comment" >> $GITHUB_OUTPUT
 
@@ -68,8 +63,10 @@ jobs:
         continue-on-error: true
         with:
           issue-number: ${{ steps.pr-number.outputs.pr }}
-          body: |
-            ${{ steps.pr-diff.outputs.comment }}
+
+          body-path: 'output.md'
+          # body: |
+          #   ${{ steps.pr-diff.outputs.comment }}
             
 
 
