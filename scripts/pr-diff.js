@@ -69,7 +69,7 @@ ${lastestMainCommitCompatibility},${currentCompatibility},${`${icon} ${diff.toFi
 					",",
 					true,
 				);
-				console.log(markdown);
+        fs.appendFileSync("output", markdown)
 			}
 
 			break;
