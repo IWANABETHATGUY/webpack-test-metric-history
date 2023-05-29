@@ -63,7 +63,7 @@ const [, , token, commit_sha] = process.argv;
 				let markdown = csvToMarkdown(
 					`main,pr,diff
 ${lastestMainCommitCompatibility},${currentCompatibility},${`${icon} ${diff.toFixed(
-						2,
+						3,
 					)}`}
 `,
 					",",
