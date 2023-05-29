@@ -70,7 +70,11 @@ jobs:
         with:
           issue-number: ${{ steps.pr-number.outputs.pr }}
           body: |
-            ${{ steps.pr-diff.outputs.comment }}
+            something
+            
+
+
+      # ${{ steps.pr-diff.outputs.comment }}
 
 
       # - name: Store benchmark result
