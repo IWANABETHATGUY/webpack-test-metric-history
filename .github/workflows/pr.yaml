@@ -1,6 +1,8 @@
 name: Pr test
 on:
   pull_request:
+    branches:
+      - master
 
 
 
