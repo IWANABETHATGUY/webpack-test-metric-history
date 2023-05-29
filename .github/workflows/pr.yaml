@@ -53,8 +53,10 @@ jobs:
         continue-on-error: true
         with:
           comment-id: ${{ steps.previous-comment.outputs.comment-id }}
-          body: |
-            ${{ steps.pr-diff.outputs.comment }}
+          
+          body-path: 'output.md'
+          # body: |
+          #   ${{ steps.pr-diff.outputs.comment }}
           edit-mode: replace
 
       - name: Write a new comment
