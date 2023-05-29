@@ -59,7 +59,7 @@ const [, , token, commit_sha] = process.argv;
 				if (currentCompatibility > lastestMainCommitCompatibility) {
 					icon = "✅ ⏫";
 				}
-        let diff = +(currentCompatibility.slice(-1)) - (+lastestMainCommitCompatibility.slice(-1));
+        let diff = +(currentCompatibility.slice(0, -1)) - (+lastestMainCommitCompatibility.slice(0, -1));
 				let markdown = markdownTable([
 					["main", "pr", "diff"],
 					[lastestMainCommitCompatibility, currentCompatibility, `${icon} ${diff.toFixed(2)}` ],
