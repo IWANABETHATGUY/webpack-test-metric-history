@@ -69,7 +69,7 @@ ${lastestMainCommitCompatibility},${currentCompatibility},${`${icon} ${diff.toFi
 					",",
 					true,
 				);
-        fs.appendFileSync(path.resolve(__dirname, "output"), markdown)
+        fs.appendFileSync(path.resolve(__dirname, "../", "output"), markdown)
 			}
 
 			break;
