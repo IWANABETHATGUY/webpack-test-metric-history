@@ -63,6 +63,7 @@ jobs:
           edit-mode: replace
 
       - name: Write a new comment
+        permissions: write-all
         if: github.event_name == 'pull_request' && !steps.previous-comment.outputs.comment-id
         uses: peter-evans/create-or-update-comment@v1.4.5
         continue-on-error: true
