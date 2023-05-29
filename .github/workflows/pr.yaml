@@ -30,7 +30,9 @@ jobs:
         id: pr-diff
         run: |
           echo "## Test Compatibility Diff" > output
+          echo '```' >> output
           node ./scripts/pr-diff.js ${{ secrets.GITHUB_TOKEN }} ${{ github.sha }} >> output
+          echo '```' >> output
           cat output
           comment="$(cat output)"
           comment="${comment//'%'/'%25'}"
