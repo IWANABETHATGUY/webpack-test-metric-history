@@ -34,8 +34,8 @@ jobs:
           cat output
           comment="$(cat output)"
           comment="${comment//'%'/'%25'}"
-          # comment="${comment//$'\n'/'%0A'}"
-          # comment="${comment//$'\r'/'%0D'}"
+          comment="${comment//$'\n'/'%0A'}"
+          comment="${comment//$'\r'/'%0D'}"
 
           echo "comment=$comment" >> $GITHUB_OUTPUT
 
