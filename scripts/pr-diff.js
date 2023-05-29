@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { run } = require("./utils");
-const csvToMarkdown = require('csv-to-markdown-table')
+const csvToMarkdown = require("csv-to-markdown-table");
 const GITHUB_ACTOR = process.env.GITHUB_ACTOR;
 const [, , token, commit_sha] = process.argv;
 (async () => {
@@ -57,11 +57,17 @@ const [, , token, commit_sha] = process.argv;
 				if (currentCompatibility > lastestMainCommitCompatibility) {
 					icon = "✅ ⏫";
 				}
-        let diff = +(currentCompatibility.slice(0, -1)) - (+lastestMainCommitCompatibility.slice(0, -1));
+				let diff =
+					+currentCompatibility.slice(0, -1) -
+					+lastestMainCommitCompatibility.slice(0, -1);
 				let markdown = csvToMarkdown(
-          `main,pr,diff
-${lastestMainCommitCompatibility},${currentCompatibility},${`${icon} ${diff.toFixed(2)}`}
-`
+					`main,pr,diff
+${lastestMainCommitCompatibility},${currentCompatibility},${`${icon} ${diff.toFixed(
+						2,
+					)}`}
+`,
+					",",
+					true,
 				);
 				console.log(markdown);
 			}
