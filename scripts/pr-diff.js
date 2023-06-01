@@ -72,7 +72,7 @@ ${lastestMainCommitCompatibility},${currentCompatibility},${`${icon} ${diff.toFi
         fs.appendFileSync(path.resolve(__dirname, "../", "output.md"), markdown)
 			}
 
-      process.exit(0)
+      process.exit(-1)
 		} catch (e) {
 			await new Promise((resolve) =>
 				setTimeout(resolve, Math.random() * 30000),
