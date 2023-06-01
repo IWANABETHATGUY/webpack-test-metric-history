@@ -70,9 +70,11 @@ ${lastestMainCommitCompatibility},${currentCompatibility},${`${icon} ${diff.toFi
 					true,
 				);
         fs.appendFileSync(path.resolve(__dirname, "../", "output.md"), markdown)
-			}
+			} else {
+        fs.rmSync(path.resolve(__dirname, "../", "output.md"))
+      }
 
-      process.exit(-1)
+      break;
 		} catch (e) {
 			await new Promise((resolve) =>
 				setTimeout(resolve, Math.random() * 30000),

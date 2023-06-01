@@ -31,7 +31,6 @@ jobs:
         run: |
           echo "## Test Compatibility Diff" > output.md
           node ./scripts/pr-diff.js ${{ secrets.GITHUB_TOKEN }} ${{ github.sha }}
-          echo "comment=$comment" >> $GITHUB_OUTPUT
 
       - name: Get the PR number
         if: github.event_name == 'pull_request'
